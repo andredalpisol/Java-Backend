@@ -2,7 +2,9 @@ package com.soulcode.Servicos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class ServicosApplication {
@@ -14,4 +16,8 @@ public class ServicosApplication {
 
 	}
 
+	@Bean // BEAN serve para fazermos injeção de dependencia, nesse caso esatamos injetando um método, não uma classe
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 }

@@ -1,11 +1,9 @@
 package com.soulcode.Servicos.Services;
 
 import com.soulcode.Servicos.Models.Cargo;
-import com.soulcode.Servicos.Models.Funcionario;
 import com.soulcode.Servicos.Repositories.CargoRepository;
 import com.soulcode.Servicos.Repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
