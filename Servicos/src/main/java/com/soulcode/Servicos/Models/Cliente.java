@@ -19,6 +19,10 @@ public class Cliente {
     @Column (nullable = false, length = 100)
     private String email;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="idEndereco", unique = true)
+    private Endereco endereco;
+
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Chamados> chamados = new ArrayList<>();
@@ -29,6 +33,15 @@ public class Cliente {
 
     public void setChamados(List<Chamados> chamados) {
         this.chamados = chamados;
+    }
+
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Integer getId() {

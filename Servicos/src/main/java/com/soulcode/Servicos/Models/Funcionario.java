@@ -19,9 +19,22 @@ public class Funcionario {
     @Column(nullable = true)
     private String foto;
 
+    @ManyToOne
+    @JoinColumn(name = "idCargo", nullable = false)
+    private Cargo cargo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "funcionario") //UM FUNCIONARIO PARA VARIOS CHAMADOS
     private List<Chamados> chamados = new ArrayList<>();
+
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
 
     public Integer getIdFuncionario() {
         return idFuncionario;

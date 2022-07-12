@@ -98,15 +98,24 @@ public class ChamadosService {
                 chamado.setStatus(StatusChamado.CONCLUIDO);
                 break;
             }
-            case "ARQUIVADO":{
-                chamado.setStatus(StatusChamado.ARQUIVADO);
-            }
-            case "RECEBIDO": {
-                chamado.setStatus(StatusChamado.RECEBIDO);
-            }
         }
 
     }
+        switch(status){
+
+        case "ARQUIVADO":{
+            chamado.setStatus(StatusChamado.ARQUIVADO);
+            break;
+        }
+
+        case "RECEBIDO": {
+            chamado.setStatus(StatusChamado.RECEBIDO);
+            break;
+            }
+
+
+        }
+
         return chamadoRepository.save(chamado);
     }
 }

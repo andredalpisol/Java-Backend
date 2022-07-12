@@ -2,7 +2,6 @@ package com.soulcode.Servicos.Controllers;
 
 import com.soulcode.Servicos.Models.Funcionario;
 import com.soulcode.Servicos.Services.FuncionarioService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,10 +42,16 @@ public class FuncionarioController {
         return ResponseEntity.ok().body(funcionario);
     }
 
-    @PostMapping("/funcionarios")
-    public ResponseEntity<Funcionario> cadastrarFuncionario(@RequestBody Funcionario funcionario){
+    @GetMapping("/funcionariosPeloCargo/{idCargo}")
+    public List <Funcionario> mostrarFuncionariosPeloCargo(@PathVariable Integer idCargo){
+        List<Funcionario> funcionarios = funcionarioService.mostrarFuncionarioPeloCargo(idCargo);
+        return funcionarios;
+    }
+
+    @PostMapping("/funcionarios/{idCargo}")
+    public ResponseEntity<Funcionario> cadastrarFuncionario(@RequestBody Funcionario funcionario, @PathVariable Integer idCargo){
         // na linha 39, o funcionario ja é salvo na tabela da database, porem ainda é necessario criar uma URI para esse novo registro da tabela
-    funcionario = funcionarioService.cadastrarFuncionario(funcionario);
+    funcionario = funcionarioService.cadastrarFuncionario(funcionario, idCargo);
     URI novaURI = ServletUriComponentsBuilder.fromCurrentRequest().path("id").buildAndExpand(funcionario.getIdFuncionario()).toUri();
         return ResponseEntity.created(novaURI).body(funcionario);
     }
