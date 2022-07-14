@@ -11,8 +11,11 @@ public class User {
     private Integer id;
     @Column(unique = true, nullable = false)
     private String login;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //AQUI SÓ VAMOS IGNORAR NA LEITURA, MAS QUANDO ESCREVERMOS CONSEGUIMOS ACESSAR (NO SERVICE/CONTROLLER)
     private String password;
+
+
 
     public Integer getId() {
         return id;

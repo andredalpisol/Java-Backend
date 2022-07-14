@@ -16,8 +16,5 @@ public class ServicosApplication {
 
 	}
 
-	@Bean // BEAN serve para fazermos injeção de dependencia, nesse caso esatamos injetando um método, não uma classe
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+
 }
