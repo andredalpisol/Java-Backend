@@ -11,7 +11,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCliente;
 
     @Column (nullable = false, length = 100)
     private String nome;
@@ -44,12 +44,12 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNome() {

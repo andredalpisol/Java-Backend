@@ -69,3 +69,5 @@ public class FuncionarioController {
         return ResponseEntity.ok().body(funcionario);
     }
 }
+
+//CACHE EVITA SOBRECARGA NO BANCO, ELE FAZ UMA CÓPIA TEMPORARIA E RESPONDE TODAS REQUISIÇÕES PELO TEMPO DETERMINADO.

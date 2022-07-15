@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JWTUtils {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret}") //IMPORTADOS DA APPLICATION.PROPERTIES
     private String secret;
 
     @Value("${jwt.expiration}")

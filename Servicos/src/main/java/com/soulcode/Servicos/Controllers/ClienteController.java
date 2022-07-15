@@ -24,28 +24,28 @@ public class ClienteController {
         return clientes;
     }
 
-    @GetMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> mostrarClientPorId(@PathVariable Integer id){
-        Cliente cliente = clienteService.mostrarClientPorId(id);
+    @GetMapping("/clientes/{idCliente}")
+    public ResponseEntity<Cliente> mostrarClientPorId(@PathVariable Integer idCliente){
+        Cliente cliente = clienteService.mostrarClientPorId(idCliente);
         return ResponseEntity.ok().body(cliente);
     }
 
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente){
         cliente = clienteService.cadastrarCliente(cliente);
-        URI novaURI = ServletUriComponentsBuilder.fromCurrentRequest().path("id").buildAndExpand(cliente.getId()).toUri();
+        URI novaURI = ServletUriComponentsBuilder.fromCurrentRequest().path("id").buildAndExpand(cliente.getIdCliente()).toUri();
         return ResponseEntity.created(novaURI).body(cliente);
     }
 
-    @DeleteMapping("/clientes/{id}")
-    public ResponseEntity<Void> deletarCliente(@PathVariable Integer id){
-        this.clienteService.deletarCliente(id);
+    @DeleteMapping("/clientes/{idCliente}")
+    public ResponseEntity<Void> deletarCliente(@PathVariable Integer idCliente){
+        this.clienteService.deletarCliente(idCliente);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> editarCliente (@PathVariable Integer id, @RequestBody Cliente cliente){
-        cliente.setId(id);
+    @PutMapping("/clientes/{idCliente}")
+    public ResponseEntity<Cliente> editarCliente (@PathVariable Integer idCliente, @RequestBody Cliente cliente){
+        cliente.setIdCliente(idCliente);
         clienteService.editarCliente(cliente);
         return ResponseEntity.ok().body(cliente);
     }

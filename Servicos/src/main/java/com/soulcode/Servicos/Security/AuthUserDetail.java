@@ -12,7 +12,7 @@ import java.util.Collection;
  * UserDetails = Guarda informações do contexto de autenticação do usuário (autorizações, habilitado, etc)
  * */
 
-public class AuthUserDetail implements UserDetails { //UserDetails é interface do JPA
+    public class AuthUserDetail implements UserDetails { //UserDetails é interface do JPA
 
     private String login;
     private String password;

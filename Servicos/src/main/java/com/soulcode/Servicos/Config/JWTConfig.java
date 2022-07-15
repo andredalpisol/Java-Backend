@@ -14,6 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
 
 @EnableWebSecurity
 public class JWTConfig extends WebSecurityConfigurerAdapter {
@@ -23,12 +29,12 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthUserDetailsService userDetailsService;
 
-    @Override
+    @Override //CONFIGURANDO SERVIÇO
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //
     }
 
-    @Override
+    @Override //CONFIGURANDO COMO O SECURITY DEVE ENTENDER A PAGINA
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable(); // UNIFICAR PORTAS, ANGULAR + DATABASE DO JAVA
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtils));
@@ -41,6 +47,19 @@ public class JWTConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //TODA VEZ Q USUARIO ENTRAR TEM QUE MANDAR O TOKEN
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedMethods(List.of(
+                HttpMethod.GET.name(),
+                HttpMethod.PUT.name(),
+                HttpMethod.POST.name(),
+                HttpMethod.DELETE.name()
+        )); //metodos permitidos para o front acessar
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); //endpoints permitidos para o front acessar
+        source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
+        return source;
+    }
 
     @Bean
     // BEAN serve para fazermos injeção de dependencia, nesse caso esatamos injetando um método, não uma classe
