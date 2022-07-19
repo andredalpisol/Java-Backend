@@ -27,9 +27,12 @@ public class CacheConfig {
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer(){
         return (builder) -> builder
                 .withCacheConfiguration("clientesCache", RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(30)).serializeValuesWith(serializationPair))
+                        .entryTtl(Duration.ofSeconds(30)).serializeValuesWith(serializationPair))
                 .withCacheConfiguration("chamadosCache", RedisCacheConfiguration.defaultCacheConfig()
-                        .entryTtl(Duration.ofSeconds(10)).serializeValuesWith(serializationPair)
-                );
+                        .entryTtl(Duration.ofSeconds(10)).serializeValuesWith(serializationPair))
+                .withCacheConfiguration("userCache", RedisCacheConfiguration.defaultCacheConfig()
+                        .entryTtl(Duration.ofSeconds(5)).serializeValuesWith(serializationPair))
+                .withCacheConfiguration("authUserDetailServiceCache", RedisCacheConfiguration.defaultCacheConfig()
+                        .entryTtl(Duration.ofHours(1)).serializeValuesWith(serializationPair));
     }
 }

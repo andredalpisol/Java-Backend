@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+//classe para gerenciar e gerar tokens jwt
 @Component
 public class JWTUtils {
 
@@ -20,7 +21,10 @@ public class JWTUtils {
 
     public String generateToken(String login){
 
-        return JWT.create().withSubject(login).withExpiresAt(new Date(System.currentTimeMillis() + expiration)).sign(Algorithm.HMAC512(secret));
+        return JWT.create()
+                .withSubject(login)
+//                .withClaim("cargo", 1) AQUI PODERIAMOS PASSAR A ROLE DO USUARIO
+                .withExpiresAt(new Date(System.currentTimeMillis() + expiration)).sign(Algorithm.HMAC512(secret));
     }
 
     public String getLogin(String token){

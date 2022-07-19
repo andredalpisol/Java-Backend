@@ -48,12 +48,11 @@ return funcionarioRepository.findAll();
         return funcionario.orElseThrow();
     }
     //criar um serviço para cadastrar um novo funcionario
-    public Funcionario cadastrarFuncionario (Funcionario funcionario, Integer idCargo) throws DataIntegrityViolationException {
+    public Funcionario cadastrarFuncionario (Funcionario funcionario) throws DataIntegrityViolationException {
         try {
         //só por precaução nós vamos colocar o id do funcionario como nulo
         funcionario.setIdFuncionario(null);
-        Optional<Cargo> cargo = cargoRepository.findById(idCargo);
-        funcionario.setCargo(cargo.get());
+        funcionario.setCargo(null);
         return funcionarioRepository.save(funcionario);
         }
 

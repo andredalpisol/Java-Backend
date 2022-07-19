@@ -20,7 +20,7 @@ public class Funcionario {
     private String foto;
 
     @ManyToOne
-    @JoinColumn(name = "idCargo", nullable = false)
+    @JoinColumn(name = "idCargo")
     private Cargo cargo;
 
     @JsonIgnore

@@ -10,6 +10,7 @@ import java.util.Collection;
  * O Spring Security não se comunica diretamente com o nosso model User =(
  * Então devemos criar uma classe que ele conheça para fazer essa comunicação,
  * UserDetails = Guarda informações do contexto de autenticação do usuário (autorizações, habilitado, etc)
+ * Abstrai o user do banco de dados para qeu security conheça seus dados, fazemos a ligação do user do springsecurity com o nosso model do projeto.
  * */
 
     public class AuthUserDetail implements UserDetails { //UserDetails é interface do JPA

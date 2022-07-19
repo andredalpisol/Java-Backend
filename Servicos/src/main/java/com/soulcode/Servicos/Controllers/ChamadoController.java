@@ -27,8 +27,8 @@ public class ChamadoController {
     @GetMapping("/chamados")
 
     public List<Chamados> mostrarTodosChamados(){
-    List<Chamados> chamados = chamadosService.mostrarTodosChamados();
-    return chamados;
+        List<Chamados> lista = chamadosService.mostrarTodosChamados();
+    return lista;
     }
 
     @GetMapping("chamados/{idChamado}")

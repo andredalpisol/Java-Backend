@@ -31,17 +31,19 @@ public class ClienteService {
         Optional<Cliente> cliente = clienteRepository.findById(idCliente);
         return cliente.orElseThrow(() -> new EntityNotFoundException("Erro, funcionario de ID " + idCliente + " não existe"));
     }
-
+    @CachePut(value = "clientesCache", key = "#cliente.idCliente")
     public Cliente cadastrarCliente(Cliente cliente){
         return clienteRepository.save(cliente);
     }
 
-    @CacheEvict(value = "clientesCache", key = "#idCliente", allEntries = true)
-    public void deletarCliente(Integer idCliente){
-        clienteRepository.deleteById(idCliente);
-    }
     @CachePut(value = "clientesCache", key = "#cliente.idCliente")
     public Cliente editarCliente(Cliente cliente){
         return clienteRepository.save(cliente);
     }
+
+    @CacheEvict(value = "clientesCache", key = "#idCliente", allEntries = true)
+    public void deletarCliente(Integer id){
+        clienteRepository.deleteById(id);
+    }
+
 }

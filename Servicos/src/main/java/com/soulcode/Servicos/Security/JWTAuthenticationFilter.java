@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+// classe entra em ação ao chamar /login
+
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
     private JWTUtils jwtUtils;
@@ -29,10 +31,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // PRIMEIRO VAI TENTAR FAZER ESSA FUNÇÃO, VERIFICA SE O LOGIN E A SENHA ESTÃO NO SERVIDOR
 
     @Override
+    //aqui é como se fosse um controller, porém de forma bruta, nós que vamos formatar a resposta da requisição e darmos uma resposta;
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
+            User user = new ObjectMapper().readValue(request.getInputStream(), User.class); // aqui vamos mapear uma requisição e transformar num formato de classe
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken // aqui fazemos a autenticação
                     (user.getLogin(), user.getPassword(), new ArrayList<>()));
         } catch (IOException io) {
             throw new RuntimeException(io.getMessage());
@@ -59,6 +62,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        //customizar mensagem de rro de login que falhou
         response.setStatus(401);
         response.setContentType("application/json");
 
@@ -66,7 +70,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().flush();
     }
 
-    String json() {
+    String json() { //formatar mensagem de erro
         long date = new Date().getTime();
         return "{"
                 + "\"timestamp\": " + date + ", "
